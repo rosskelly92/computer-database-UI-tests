@@ -26,7 +26,7 @@ Feature: Create
     Then updated values are displayed in the table
     And updated values are displayed in edit mode
 
-  @update @TC012 @wip
+  @update @TC012
   Scenario: Cannot save an update with empty name field
     Given I add a new computer with all fields populated
     When I update the computer to remove name
