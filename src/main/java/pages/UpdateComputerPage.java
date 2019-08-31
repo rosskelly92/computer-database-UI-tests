@@ -82,4 +82,14 @@ public class UpdateComputerPage extends BasePage {
         Do.click(createBtn);
         return PageFactory.initElements(driver, HomePage.class);
     }
+
+    public HomePage updateChosenFields(String name, String intro, String discont, String company) {
+        if (name.equals("yes")) Do.sendKeys(nameField, DataGen.getUpdatedName());
+        if (intro.equals("yes")) Do.sendKeys(introField, DataGen.getUpdatedIntroDate());
+        if (discont.equals("yes")) Do.sendKeys(discontField, DataGen.getUpdatedDiscontDate());
+        if (company.equals("yes")) Do.sendKeys(discontField, DataGen.getUpdatedDiscontDate());
+        Do.select(companyDropdown, DataGen.getUpdatedCompanyName());
+        Do.click(createBtn);
+        return PageFactory.initElements(driver, HomePage.class);
+    }
 }
