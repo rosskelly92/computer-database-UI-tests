@@ -27,59 +27,50 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-picocontainer</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
         </dependency>
-
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j2.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.picocontainer</groupId>
             <artifactId>picocontainer</artifactId>
             <version>${picocontainer.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
             <version>2.1</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -95,7 +86,6 @@
 
     <build>
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -108,7 +98,6 @@
                     </includes>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -118,7 +107,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>com.github.temyers</groupId>
                 <artifactId>cucumber-jvm-parallel-plugin</artifactId>
@@ -134,43 +122,31 @@
                             <glue>
                                 <package>com.glue</package>
                             </glue>
-                            <!-- These are optional, with the default values -->
-                            <!-- Where to output the generated tests -->
-                            <outputDirectory>${project.build.directory}/generated-test-sources/cucumber
-                            </outputDirectory>
-                            <featuresDirectory>src/test/resources/Features/</featuresDirectory>
+                            <outputDirectory>${project.build.directory}/generated-test-sources/cucumber</outputDirectory>
+                            <featuresDirectory>src/test/resources/features/</featuresDirectory>
                             <cucumberOutputDir>target/cucumber-parallel/</cucumberOutputDir>
                             <plugins>
                                 <plugin>
-                                    <!--The available options are junit, testng, html, pretty, json, usage and rerun -->
                                     <name>json</name>
-                                    <!--Optional file extension. For build in cucumber plugins a sensible default is provided. -->
                                     <extension>json</extension>
-                                    <!--Optional output directory. Overrides cucumberOutputDirectory. Useful when different
-                                        plugins create files with the same extension-->
                                     <outputDirectory>${project.build.directory}/cucumber-parallel/json</outputDirectory>
                                 </plugin>
                             </plugins>
                             <strict>true</strict>
-                            <!-- CucumberOptions.monochrome property -->
                             <monochrome>true</monochrome>
-                            <!-- The tags to run, maps to CucumberOptions.tags property. Default is no tags. -->
+                            <!-- The tags to run, maps to CucumberOptions.tags property. -->
                             <tags>
-                                <tag>@wip</tag>
+                                <tag>@regression</tag>
                             </tags>
-                            <!-- Generate TestNG runners instead of JUnit ones. -->
                             <useTestNG>false</useTestNG>
-                            <!-- The naming scheme to use for the generated test classes.  One of ['simple', 'feature-title', 'pattern'] -->
                             <namingScheme>simple</namingScheme>
-                            <!-- The class naming pattern to use.  Only required/used if naming scheme is 'pattern'.-->
                             <namingPattern>Parallel{c}IT</namingPattern>
-                            <!-- One of [SCENARIO, FEATURE]. SCENARIO generates one runner per scenario.  FEATURE generates a runner per feature. -->
                             <parallelScheme>SCENARIO</parallelScheme>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
+
 </project>

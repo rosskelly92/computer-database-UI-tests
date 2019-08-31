@@ -62,4 +62,10 @@ public class HomePageSteps {
         assertThat("Incorrect discont date", homePage.getDisplayedDiscontDate(), is(DataGen.getFormattedUpdatedDiscontDate()));
         assertThat("Incorrect company name", homePage.getDisplayedCompany(), is(DataGen.getUpdatedCompanyName()));
     }
+
+    @When("^I search for the original computer$")
+    public void iSearchForTheOriginalComputer() throws Throwable {
+        homePage = helper.getHomePage()
+                .applyNameFilter(DataGen.getName());
+    }
 }
