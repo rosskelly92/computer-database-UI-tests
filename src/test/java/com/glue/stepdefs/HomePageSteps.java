@@ -31,14 +31,12 @@ public class HomePageSteps {
     public void i_search_for_the_computer() {
         homePage = helper.getHomePage()
                 .applyNameFilter(DataGen.getName());
-        assertThat("Unexpected number of filter results", homePage.numberOfComputersInTable(), is(1));
     }
 
     @When("I search for the updated computer")
     public void i_search_for_the_updated_computer() {
         homePage = helper.getHomePage()
                 .applyNameFilter(DataGen.getUpdatedName());
-        assertThat("Unexpected number of filter results", homePage.numberOfComputersInTable(), is(1));
     }
 
     @When("I search for the deleted computer")

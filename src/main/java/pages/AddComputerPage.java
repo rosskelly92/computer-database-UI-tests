@@ -64,13 +64,22 @@ public class AddComputerPage extends BasePage {
         return validationBox.isDisplayed();
     }
 
-    public UpdateComputerPage inputName() {
+    public AddComputerPage inputName() {
         Do.sendKeys(nameField, DataGen.getName());
-        return PageFactory.initElements(driver, UpdateComputerPage.class);
+        return PageFactory.initElements(driver, AddComputerPage.class);
     }
 
     public HomePage clickCreate() {
         Do.click(createBtn);
+        return PageFactory.initElements(driver, HomePage.class);
+    }
+
+    public HomePage cancelAddition() {
+        Do.sendKeys(nameField, DataGen.getName());
+        Do.sendKeys(introField, DataGen.getIntroDate());
+        Do.sendKeys(discontField, DataGen.getDiscontDate());
+        Do.select(companyDropdown, DataGen.getCompanyName());
+        Do.click(cancelBtn);
         return PageFactory.initElements(driver, HomePage.class);
     }
 }

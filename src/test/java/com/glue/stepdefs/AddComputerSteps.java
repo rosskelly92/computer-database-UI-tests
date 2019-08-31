@@ -1,5 +1,6 @@
 package com.glue.stepdefs;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -59,5 +60,12 @@ public class AddComputerSteps {
         homePage = helper.getAddComputerPage()
                 .inputName()
                 .clickCreate();
+    }
+
+    @When("^I cancel a new computer addition$")
+    public void iCancelANewComputerAddition() throws Throwable {
+        homePage = helper.getHomePage()
+                .clickOnAddComputer()
+                .cancelAddition();
     }
 }
