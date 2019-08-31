@@ -1,37 +1,27 @@
 package utils.browserUtils;
 
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 
 public class BrowserOptions {
 
     public static FirefoxOptions getFirefoxOptions() {
+        FirefoxBinary firefoxBinary = new FirefoxBinary();
+        firefoxBinary.addCommandLineOptions("--headless");
         FirefoxOptions options = new FirefoxOptions();
-//        FirefoxProfile profile = new FirefoxProfile();
-//        profile.setAcceptUntrustedCertificates(true);
-//        profile.setAssumeUntrustedCertificateIssuer(false);
-        //Set Firefox profile to capabilities
-//        options.setCapability(FirefoxDriver.PROFILE, profile);
+        options.setBinary(firefoxBinary);
         return options;
     }
 
     public static ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless");
-//        options.addArguments("--disable-infobars");
-//        options.addArguments("--incognito");
-//        options.addArguments("--start-maximised");
-//        options.addArguments("--ignore-certificate-errors");
-//        options.addArguments("--disable-popup-blocking");
-//        options.addArguments("--fast-start");
+        options.addArguments("--headless");
         return options;
     }
 
+    //ToDo: I guess I should support edge
 //    public static EdgeOptions getEdgeOptions() {
-//        //ToDo: I guess
 //        EdgeOptions options = new EdgeOptions();
 //        return options;
 //    }
