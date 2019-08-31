@@ -48,9 +48,9 @@ public class HomePage extends BasePage {
         return driver.getTitle();
     }
 
-    public AddNewComputerPage clickOnAddComputer() {
+    public AddComputerPage clickOnAddComputer() {
         Do.click(addComputerBtn);
-        return PageFactory.initElements(driver, AddNewComputerPage.class);
+        return PageFactory.initElements(driver, AddComputerPage.class);
     }
 
     public boolean saveWasSuccessful() {

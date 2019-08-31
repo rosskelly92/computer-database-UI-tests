@@ -2,7 +2,7 @@ package utils.helpers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import pages.AddNewComputerPage;
+import pages.AddComputerPage;
 import pages.BasePage;
 import pages.HomePage;
 import pages.UpdateComputerPage;
@@ -13,7 +13,7 @@ public class WorldHelper {
     private WebDriver driver;
     private static BasePage basePage;
     private static HomePage homePage;
-    private static AddNewComputerPage addNewComputerPage;
+    private static AddComputerPage addComputerPage;
     private static UpdateComputerPage updateComputerPage;
 
     public BasePage getBasePage() {
@@ -28,10 +28,10 @@ public class WorldHelper {
         return PageFactory.initElements(driver, HomePage.class);
     }
 
-    public AddNewComputerPage getAddNewComputerPage() {
-        if (addNewComputerPage != null) return addNewComputerPage;
+    public AddComputerPage getAddComputerPage() {
+        if (addComputerPage != null) return addComputerPage;
         driver = DriverFactory.getDriver();
-        return PageFactory.initElements(driver, AddNewComputerPage.class);
+        return PageFactory.initElements(driver, AddComputerPage.class);
     }
 
     public UpdateComputerPage getUpdateComputerPage() {
