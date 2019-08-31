@@ -1,5 +1,7 @@
 package com.glue.stepdefs;
 
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pages.HomePage;
@@ -51,5 +53,26 @@ public class UpdateComputerSteps {
         assertThat(updateComputerPage.getIntroDateValue(), is(DataGen.getUpdatedIntroDate()));
         assertThat(updateComputerPage.getDiscontDateValue(), is(DataGen.getUpdatedDiscontDate()));
         assertThat(updateComputerPage.getCompanyNameValue(), is(DataGen.getUpdatedCompanyName()));
+    }
+
+    @When("^I update the computer to remove name$")
+    public void iUpdateTheComputerToRemoveName() throws Throwable {
+        updateComputerPage = helper.getHomePage()
+                .applyNameFilter(DataGen.getName())
+                .selectComputer()
+                .updateNameToEmpty();
+    }
+
+    @Then("^I receive an update validation warning$")
+    public void iReceiveAnUpdateValidationWarning() throws Throwable {
+        assertThat("Page Header indicated the wrong page display", updateComputerPage.getH1(), is("Edit computer"));
+        assertThat("validation box not displayed", updateComputerPage.validationBoxDisplayed(), is(true));
+    }
+
+    @And("^I can proceed with update upon filling the field$")
+    public void iCanProceedWithUpdateUponFillingTheField() throws Throwable {
+        homePage = helper.getUpdateComputerPage()
+                .inputName()
+                .clickCreate();
     }
 }
