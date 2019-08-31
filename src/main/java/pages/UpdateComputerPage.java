@@ -36,6 +36,12 @@ public class UpdateComputerPage extends BasePage {
     @FindBy (xpath = "//input[contains(@value,'Delete')]")
     private WebElement deleteBtn;
 
+    @FindBy(xpath = "//section//h1")
+    private WebElement h1;
+
+    @FindBy(xpath = "//*[@class='clearfix error']")
+    private WebElement validationBox;
+
     public HomePage updateAllDetails() {
         Do.sendKeys(nameField, DataGen.getUpdatedName());
         Do.sendKeys(introField, DataGen.getUpdatedIntroDate());
@@ -54,4 +60,26 @@ public class UpdateComputerPage extends BasePage {
     public String getIntroDateValue() { return Do.jsGetValue(introField); }
     public String getDiscontDateValue() { return Do.jsGetValue(discontField); }
     public String getCompanyNameValue() { return selectedDropdownField.getText(); }
+
+    public UpdateComputerPage updateNameToEmpty() {
+        Do.sendKeys(nameField, "");
+        Do.click(createBtn);
+        return PageFactory.initElements(driver, UpdateComputerPage.class);
+    }
+
+    public String getH1() { return h1.getText(); }
+
+    public Boolean validationBoxDisplayed() {
+        return validationBox.isDisplayed();
+    }
+
+    public UpdateComputerPage inputName() {
+        Do.sendKeys(nameField, DataGen.getUpdatedName());
+        return PageFactory.initElements(driver, UpdateComputerPage.class);
+    }
+
+    public HomePage clickCreate() {
+        Do.click(createBtn);
+        return PageFactory.initElements(driver, HomePage.class);
+    }
 }

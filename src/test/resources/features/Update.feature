@@ -25,3 +25,11 @@ Feature: Create
     When I search for the updated computer
     Then updated values are displayed in the table
     And updated values are displayed in edit mode
+
+  @update @TC012
+  Scenario: Cannot save an update with empty name field
+    Given I add a new computer with all fields populated
+    When I update the computer to remove name
+    Then I receive an update validation warning
+    And I can proceed with update upon filling the field
+    And the update message reads "Done! Computer " computer name " has been updated"

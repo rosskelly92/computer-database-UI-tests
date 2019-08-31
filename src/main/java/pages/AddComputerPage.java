@@ -64,9 +64,9 @@ public class AddComputerPage extends BasePage {
         return validationBox.isDisplayed();
     }
 
-    public AddComputerPage inputName() {
+    public UpdateComputerPage inputName() {
         Do.sendKeys(nameField, DataGen.getName());
-        return PageFactory.initElements(driver, AddComputerPage.class);
+        return PageFactory.initElements(driver, UpdateComputerPage.class);
     }
 
     public HomePage clickCreate() {

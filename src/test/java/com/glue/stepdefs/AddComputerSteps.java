@@ -59,6 +59,5 @@ public class AddComputerSteps {
         homePage = helper.getAddComputerPage()
                 .inputName()
                 .clickCreate();
-
     }
 }
