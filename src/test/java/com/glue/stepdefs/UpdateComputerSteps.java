@@ -75,4 +75,38 @@ public class UpdateComputerSteps {
                 .inputName()
                 .clickCreate();
     }
+
+    @When("^I update the name only$")
+    public void iUpdateTheNameOnly() throws Throwable {
+        homePage = helper.getHomePage()
+                .applyNameFilter(DataGen.getName())
+                .selectComputer()
+                .inputName()
+                .clickCreate();
+    }
+
+    @Then("^only the name is updated in the table$")
+    public void onlyTheNameIsUpdatedInTheTable() throws Throwable {
+        assertThat("Incorrect computer name", homePage.getDisplayedName(), is(DataGen.getUpdatedName()));
+        assertThat("Incorrect intro date", homePage.getDisplayedIntroDate(), is("-"));
+        assertThat("Incorrect discont date", homePage.getDisplayedDiscontDate(), is("-"));
+        assertThat("Incorrect company name", homePage.getDisplayedCompany(), is("-"));
+    }
+
+    @When("^I update to remove non mandatory fields$")
+    public void iUpdateToRemoveNonMandatoryFields() throws Throwable {
+        homePage = helper.getHomePage()
+                .applyNameFilter(DataGen.getName())
+                .selectComputer()
+                .clearNonMandatoryFields()
+                .clickCreate();
+    }
+
+    @Then("^the table shows non mandatory fields as empty$")
+    public void theTableShowsNonMandatoryFieldsAsEmpty() throws Throwable {
+        assertThat("Incorrect computer name", homePage.getDisplayedName(), is(DataGen.getName()));
+        assertThat("Incorrect intro date", homePage.getDisplayedIntroDate(), is("-"));
+        assertThat("Incorrect discont date", homePage.getDisplayedDiscontDate(), is("-"));
+        assertThat("Incorrect company name", homePage.getDisplayedCompany(), is("-"));
+    }
 }
