@@ -21,7 +21,7 @@ Update URL if necessary
 
 ## Running the tests
 
-In the pom.xml build section, update the \<tags\> property to any or all of the utilised tags below:
+In the pom.xml build section, update the \<tags\> property to any or all of the utilised tags below to run those cucumber tags:
 ```$xslt
 wip
 smoke
@@ -38,15 +38,8 @@ mvn clean verify
 
 ### Break down into end to end tests
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## CI/CD
-
-Add additional notes about how to deploy this on a live system
+@smoke tests cover basic create/read/update/delete functions\
+All tests are marked as @regression for full coverage
 
 ## Authors
 
