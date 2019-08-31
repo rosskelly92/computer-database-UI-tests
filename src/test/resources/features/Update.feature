@@ -40,3 +40,17 @@ Feature: Create
     When I update the computer
     And I search for the updated computer
     Then updated values are displayed in the table
+
+  @update @TC009
+  Scenario: Update name only computer to a new name
+    Given I add a new computer with only name field populated
+    When I update the name only
+    And I search for the updated computer
+    Then only the name is updated in the table
+
+  @update @TC010
+  Scenario: Update computer to remove all non mandatory information
+    Given I add a new computer with all fields populated
+    When I update to remove non mandatory fields
+    And I search for the computer
+    Then the table shows non mandatory fields as empty
