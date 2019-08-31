@@ -33,3 +33,10 @@ Feature: Create
     Then I receive an update validation warning
     And I can proceed with update upon filling the field
     And the update message reads "Done! Computer " computer name " has been updated"
+
+  @update @TC008
+  Scenario: Update name only computer to have additional fields
+    Given I add a new computer with only name field populated
+    When I update the computer
+    And I search for the updated computer
+    Then updated values are displayed in the table
