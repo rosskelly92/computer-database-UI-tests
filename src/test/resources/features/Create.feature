@@ -28,3 +28,9 @@ Feature: Create
     Then I receive a validation warning
     And I can proceed upon filling the field
     And the save message reads "Done! Computer " computer name " has been created"
+
+  @create @TC007
+  Scenario: Cancel addition
+    When I cancel a new computer addition
+    And I search for the computer
+    Then there are no search results
