@@ -7,9 +7,9 @@ import org.openqa.selenium.support.PageFactory;
 import utils.helpers.Do;
 import utils.helpers.DataGen;
 
-public class AddNewComputerPage extends BasePage {
+public class AddComputerPage extends BasePage {
 
-    public AddNewComputerPage(WebDriver driver) { super(driver);}
+    public AddComputerPage(WebDriver driver) { super(driver);}
 
     @FindBy(id = "name")
     private WebElement nameField;
@@ -29,6 +29,12 @@ public class AddNewComputerPage extends BasePage {
     @FindBy(xpath = "//a[text()='Cancel']")
     private WebElement cancelBtn;
 
+    @FindBy(xpath = "//section//h1")
+    private WebElement h1;
+
+    @FindBy(xpath = "//*[@class='clearfix error']")
+    private WebElement validationBox;
+
     public HomePage addComputerNameOnly(String name) {
         Do.sendKeys(nameField, name);
         Do.click(createBtn);
@@ -40,6 +46,30 @@ public class AddNewComputerPage extends BasePage {
         Do.sendKeys(introField, DataGen.getIntroDate());
         Do.sendKeys(discontField, DataGen.getDiscontDate());
         Do.select(companyDropdown, DataGen.getCompanyName());
+        Do.click(createBtn);
+        return PageFactory.initElements(driver, HomePage.class);
+    }
+
+    public AddComputerPage addComputerWithoutName() {
+        Do.sendKeys(introField, DataGen.getIntroDate());
+        Do.sendKeys(discontField, DataGen.getDiscontDate());
+        Do.select(companyDropdown, DataGen.getCompanyName());
+        Do.click(createBtn);
+        return PageFactory.initElements(driver, AddComputerPage.class);
+    }
+
+    public String getH1() { return h1.getText(); }
+
+    public Boolean validationBoxDisplayed() {
+        return validationBox.isDisplayed();
+    }
+
+    public AddComputerPage inputName() {
+        Do.sendKeys(nameField, DataGen.getName());
+        return PageFactory.initElements(driver, AddComputerPage.class);
+    }
+
+    public HomePage clickCreate() {
         Do.click(createBtn);
         return PageFactory.initElements(driver, HomePage.class);
     }

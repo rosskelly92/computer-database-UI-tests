@@ -22,3 +22,9 @@ Feature: Create
     Then correct values are displayed in the table
     And correct values are displayed in edit mode
 
+  @smoke @create @TC003 @wip
+  Scenario: Cannot add a computer without a name field
+    When I save a new computer without name
+    Then I receive a validation warning
+    And I can proceed upon filling the field
+    And the save message reads "Done! Computer " computer name " has been created"

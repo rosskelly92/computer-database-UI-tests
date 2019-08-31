@@ -1,9 +1,9 @@
 package com.glue.stepdefs;
 
-import cucumber.api.PendingException;
-import cucumber.api.java.en.Given;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import pages.AddComputerPage;
 import pages.HomePage;
 import utils.helpers.DataGen;
 import utils.helpers.WorldHelper;
@@ -15,6 +15,7 @@ public class AddComputerSteps {
 
     public WorldHelper helper;
     public HomePage homePage;
+    public AddComputerPage addComputerPage;
 
     public AddComputerSteps (WorldHelper helper) {this.helper = helper;}
 
@@ -39,4 +40,25 @@ public class AddComputerSteps {
                 .addNewComputer();
     }
 
+    @When("^I save a new computer without name$")
+    public void iSaveANewComputerWithoutName() throws Throwable {
+        addComputerPage = helper.getHomePage()
+                .clickOnAddComputer()
+                .addComputerWithoutName();
+    }
+
+    @Then("I receive a validation warning")
+    public void i_receive_a_validation_warning() {
+        assertThat("Page Header indicated the wrong page display", addComputerPage.getH1(), is("Add a computer"));
+        assertThat("validation box not displayed", addComputerPage.validationBoxDisplayed(), is(true));
+    }
+
+
+    @And("^I can proceed upon filling the field$")
+    public void iCanProceedUponFillingTheField() throws Throwable {
+        homePage = helper.getAddComputerPage()
+                .inputName()
+                .clickCreate();
+
+    }
 }
