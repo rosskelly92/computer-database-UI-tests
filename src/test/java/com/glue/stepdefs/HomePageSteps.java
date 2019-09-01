@@ -167,6 +167,6 @@ public class HomePageSteps {
 
     @Then("^the values are displayed in \"([^\"]*)\" order of \"([^\"]*)\"$")
     public void theValuesAreDisplayedInOrderOf(String sortOrder, String sortedColumn) throws Throwable {
-
+        assertThat(sortedColumn + " column is not sorted correctly", homePage.isTableSortedCorrectly(sortedColumn, sortOrder), is(true));
     }
 }

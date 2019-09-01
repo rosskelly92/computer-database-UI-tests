@@ -46,8 +46,8 @@ Feature: Create
     And pagination text reads "Displaying 11 to 11 of 11"
     And the search results read "11 computers found"
 
-  @retrieve @TC023
-  Scenario: Verify Sort Order
+  @retrieve @TC023 @bug @B003
+  Scenario Outline: Verify Sort Order
     Given I search for "b"
     When I apply "<order>" sort order to "<column>"
     Then the values are displayed in "<order>" order of "<column>"

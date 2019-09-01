@@ -1,5 +1,6 @@
 package pages;
 
+import com.google.common.collect.Ordering;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import utils.helpers.Do;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomePage extends BasePage {
@@ -80,7 +82,7 @@ public class HomePage extends BasePage {
         Do.sendKeys(filterInput, name);
         Do.click(filterBtn);
         log.info("Applying filter: " + name);
-        if(tableResultsHeader.getText().contains("computers found")) Do.waitForAllMatch(tableLinks, name);
+//        if(tableResultsHeader.getText().contains("computers found")) Do.waitForAllMatch(tableLinks, name);
         return PageFactory.initElements(driver, HomePage.class);
     }
 
@@ -145,24 +147,60 @@ public class HomePage extends BasePage {
     }
 
     public HomePage applySorting(String columnToSort, String sortOrder) {
-
         By columnLink = By.xpath("//th//a[contains(.,'"+columnToSort+"')]");
         By columnSortStatus = By.xpath("//th[.//a[contains(.,'"+columnToSort+"')]]");
 
-        WebElement link = driver.findElement(columnLink);
-        WebElement sortStatus = driver.findElement(columnSortStatus);
-
         switch (sortOrder) {
             case "ascending":
-                while (!sortStatus.getAttribute("class").contains("SortUp")) {
-                    Do.click(link);
+                while (!driver.findElement(columnSortStatus).getAttribute("class").contains("SortUp")) {
+                    Do.click(driver.findElement(columnLink));
+                    Do.checkPageReady();
                 }
+                break;
             case "descending":
-                while (!sortStatus.getAttribute("class").contains("SortDown")) {
-                    Do.click(link);
+                while (!driver.findElement(columnSortStatus).getAttribute("class").contains("SortDown")) {
+                    Do.click(driver.findElement(columnLink));
+                    Do.checkPageReady();
                 }
+                break;
         }
         return PageFactory.initElements(driver, HomePage.class);
+
+    }
+
+    public Boolean isTableSortedCorrectly(String sortedColumn, String sortOrder) {
+        By resultsLocator;
+        switch (sortedColumn) {
+            case "Computer name":
+                resultsLocator = By.xpath("//td[1]");
+                break;
+            case "Introduced":
+                resultsLocator = By.xpath("//td[2]");
+                break;
+            case "Discontinued":
+                resultsLocator = By.xpath("//td[3]");
+                break;
+            case "Company":
+                resultsLocator = By.xpath("//td[4]");
+                break;
+            default:
+                log.error("sort column not recognised: " + sortedColumn);
+                return false;
+        }
+        List<WebElement> elements = driver.findElements(resultsLocator);
+        List< String > values = new ArrayList<>();
+        for (WebElement e : elements)
+            values.add(e.getText());
+        log.info("Table results for column '" + sortedColumn + "' are: " + values);
+        switch(sortOrder) {
+            case "ascending":
+                return Ordering.natural().isOrdered(values);
+            case "descending":
+                return Ordering.natural().reverse().isOrdered(values);
+            default:
+                log.error("sort order not recognised: " + sortOrder);
+                return false;
+        }
 
     }
 }

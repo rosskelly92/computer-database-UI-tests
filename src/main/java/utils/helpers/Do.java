@@ -82,4 +82,9 @@ public class Do {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         return js.executeScript("return arguments[0].value;", element).toString();
     }
+
+    public static void checkPageReady() {
+        new WebDriverWait(driver, 30).until((ExpectedCondition<Boolean>) wd ->
+                ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
+    }
 }
