@@ -89,4 +89,11 @@ public class AddComputerSteps {
                 .clickOnAddComputer()
                 .addComputerWithDiscontDate(dateValue);
     }
+
+    @When("^I add a computer with special characters in the name$")
+    public void iAddAComputerWithSpecialCharactersInTheName() throws Throwable {
+        homePage = helper.getHomePage()
+                .clickOnAddComputer()
+                .addComputerNameOnly(DataGen.getStrangeName());
+    }
 }

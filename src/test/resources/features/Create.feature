@@ -58,15 +58,21 @@ Feature: Create
     When I attempt to add a computer with Discontinued date "<discont>"
     Then I receive a validation warning
     Examples:
-      | discont |
-      | 2019-01-00 |
-      | 2019-01-32 |
-      | 2019-02-29 |
-      | 2019-13-01 |
-      | 2019-00-01 |
-      | 2019-01--01 |
-      | 2019--01-01 |
-      | 2019.01.01  |
-      | 2019 01 01  |
-      | 01-01-2019  |
-      | 01 Jan 2019 |
+    | discont |
+    | 2019-01-00 |
+    | 2019-01-32 |
+    | 2019-02-29 |
+    | 2019-13-01 |
+    | 2019-00-01 |
+    | 2019-01--01 |
+    | 2019--01-01 |
+    | 2019.01.01  |
+    | 2019 01 01  |
+    | 01-01-2019  |
+    | 01 Jan 2019 |
+
+  @create @TC006 @bug @B004
+  Scenario: special characters in Name field
+    When I add a computer with special characters in the name
+    And I search for the special computer
+    Then The special computer is displayed in results
