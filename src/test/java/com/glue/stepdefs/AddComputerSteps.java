@@ -2,6 +2,7 @@ package com.glue.stepdefs;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pages.AddComputerPage;
@@ -67,5 +68,11 @@ public class AddComputerSteps {
         homePage = helper.getHomePage()
                 .clickOnAddComputer()
                 .cancelAddition();
+    }
+
+    @Given("^I have (\\d+) identical computers$")
+    public void iHaveIdenticalComputers(int numberToAdd) throws Throwable {
+        homePage = helper.getHomePage()
+                .addMultipleComputers(numberToAdd);
     }
 }

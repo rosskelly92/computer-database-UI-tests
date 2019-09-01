@@ -6,17 +6,17 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class BrowserOptions {
 
+    public static ChromeOptions getChromeOptions() {
+        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--headless");
+        return options;
+    }
+
     public static FirefoxOptions getFirefoxOptions() {
         FirefoxBinary firefoxBinary = new FirefoxBinary();
         firefoxBinary.addCommandLineOptions("--headless");
         FirefoxOptions options = new FirefoxOptions();
         options.setBinary(firefoxBinary);
-        return options;
-    }
-
-    public static ChromeOptions getChromeOptions() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
         return options;
     }
 

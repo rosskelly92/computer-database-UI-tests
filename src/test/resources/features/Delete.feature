@@ -17,3 +17,9 @@ Feature: Create
     When I search for the deleted computer
     Then there are no search results
 
+  @delete @TC018
+  Scenario: Delete a duplicate computer
+    Given I have 2 identical computers
+    When I delete the computer
+    And I search for the computer
+    Then correct values are displayed in the table
