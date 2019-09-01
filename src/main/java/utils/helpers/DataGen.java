@@ -23,20 +23,26 @@ public class DataGen {
     private static String updatedCompanyName;
 
     public static String getName() {
-        if (name == null) name = RandomStringUtils.randomAlphanumeric(10);
-        log.info("name is: " + name);
+        if (name == null) {
+            name = RandomStringUtils.randomAlphanumeric(10);
+            log.info("name is: " + name);
+        }
         return name;
     }
 
     public static String getIntroDate() {
-        if (introDate == null) introDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        log.info("introDate is: " + introDate);
+        if (introDate == null) {
+            introDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            log.info("introDate is: " + introDate);
+    }
         return introDate;
     }
 
     public static String getDiscontDate() {
-        if (discontDate == null) discontDate = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        log.info("discontDate is: " + discontDate);
+        if (discontDate == null) {
+            discontDate = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            log.info("discontDate is: " + discontDate);
+    }
         return discontDate;
     }
 
@@ -49,26 +55,34 @@ public class DataGen {
     }
 
     public static String getCompanyName() {
-        if (companyName == null) companyName = "Nokia";
-        log.info("companyName is: " + companyName);
+        if (companyName == null) {
+            companyName = "Nokia";
+            log.info("companyName is: " + companyName);
+        }
         return companyName;
     }
 
     public static String getUpdatedName() {
-        if (updatedName == null) updatedName = RandomStringUtils.randomAlphanumeric(10);
-        log.info("updatedName is: " + updatedName);
+        if (updatedName == null) {
+            updatedName = RandomStringUtils.randomAlphanumeric(10);
+            log.info("updatedName is: " + updatedName);
+        }
         return updatedName;
     }
 
     public static String getUpdatedIntroDate() {
-        if (updatedIntroDate == null) updatedIntroDate = LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        log.info("updatedIntroDate is: " + updatedIntroDate);
+        if (updatedIntroDate == null) {
+            updatedIntroDate = LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            log.info("updatedIntroDate is: " + updatedIntroDate);
+        }
         return updatedIntroDate;
     }
 
     public static String getUpdatedDiscontDate() {
-        if (updatedDiscontDate == null) updatedDiscontDate = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        log.info("updatedDiscontDate is: " + updatedDiscontDate);
+        if (updatedDiscontDate == null) {
+            updatedDiscontDate = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            log.info("updatedDiscontDate is: " + updatedDiscontDate);
+        }
         return updatedDiscontDate;
     }
 
@@ -81,8 +95,10 @@ public class DataGen {
     }
 
     public static String getUpdatedCompanyName() {
-        if (updatedCompanyName == null) updatedCompanyName = "Nintendo";
-        log.info("updatedCompanyName is: " + updatedCompanyName);
+        if (updatedCompanyName == null) {
+            updatedCompanyName = "Nintendo";
+            log.info("updatedCompanyName is: " + updatedCompanyName);
+        }
         return updatedCompanyName;
     }
 

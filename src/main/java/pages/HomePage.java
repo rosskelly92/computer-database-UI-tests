@@ -84,4 +84,14 @@ public class HomePage extends BasePage {
 
     public String getResultsHeader() { return tableResultsHeader.getText(); }
     public String emptyTableText() { return noResultsTable.getText(); }
+
+    public HomePage addMultipleComputers(int numberToAdd) {
+        int loops = 0;
+        while (loops < numberToAdd) {
+            AddComputerPage addComputerPage = clickOnAddComputer();
+            addComputerPage.addNewComputer();
+            loops++;
+        }
+        return PageFactory.initElements(driver, HomePage.class);
+    }
 }

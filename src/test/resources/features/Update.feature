@@ -56,14 +56,14 @@ Feature: Create
     Then the table shows non mandatory fields as empty
 
   @update @TC016
-  Scenario: Cancel an update
+  Scenario: Cancel an update - verify original preserved
     Given I add a new computer with all fields populated
     When I cancel an update
     And I search for the original computer
     Then correct values are displayed in the table
 
   @update @TC016
-  Scenario: Cancel an update
+  Scenario: Cancel an update - verify update not applied
     Given I add a new computer with all fields populated
     When I cancel an update
     And I search for the updated computer
