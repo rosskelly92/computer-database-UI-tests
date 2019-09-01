@@ -30,8 +30,7 @@ public class DeleteComputerSteps {
 
     @Then("there are no search results")
     public void there_are_no_search_results() {
-        homePage = helper.getHomePage()
-                .applyNameFilter(DataGen.getName());
+        homePage = helper.getHomePage();
         assertThat(homePage.getResultsHeader(), is("No computers found"));
         assertThat(homePage.emptyTableText(), is("Nothing to display"));
     }

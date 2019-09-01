@@ -109,4 +109,12 @@ public class UpdateComputerSteps {
         assertThat("Incorrect discont date", homePage.getDisplayedDiscontDate(), is("-"));
         assertThat("Incorrect company name", homePage.getDisplayedCompany(), is("-"));
     }
+
+    @When("^I cancel an update$")
+    public void iCancelAnUpdate() throws Throwable {
+        homePage = helper.getHomePage()
+                .applyNameFilter(DataGen.getName())
+                .selectComputer()
+                .updateFieldsAndCancel();
+    }
 }

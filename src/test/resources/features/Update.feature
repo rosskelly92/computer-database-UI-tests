@@ -54,3 +54,17 @@ Feature: Create
     When I update to remove non mandatory fields
     And I search for the computer
     Then the table shows non mandatory fields as empty
+
+  @update @TC016
+  Scenario: Cancel an update
+    Given I add a new computer with all fields populated
+    When I cancel an update
+    And I search for the original computer
+    Then correct values are displayed in the table
+
+  @update @TC016
+  Scenario: Cancel an update
+    Given I add a new computer with all fields populated
+    When I cancel an update
+    And I search for the updated computer
+    Then there are no search results
