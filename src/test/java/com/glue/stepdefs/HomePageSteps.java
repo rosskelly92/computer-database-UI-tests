@@ -1,6 +1,7 @@
 package com.glue.stepdefs;
 
 import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pages.HomePage;
@@ -65,5 +66,17 @@ public class HomePageSteps {
     public void iSearchForTheOriginalComputer() throws Throwable {
         homePage = helper.getHomePage()
                 .applyNameFilter(DataGen.getName());
+    }
+
+    @And("^I search for the special computer$")
+    public void iSearchForTheSpecialComputer() throws Throwable {
+        homePage = helper.getHomePage()
+                .applyNameFilter(DataGen.getStrangeName());
+    }
+
+    @Then("^The special computer is displayed in results$")
+    public void theSpecialComputerIsDisplayedInResults() throws Throwable {
+        assertThat("Incorrect computer name", homePage.getDisplayedName(), is(DataGen.getStrangeName()));
+
     }
 }

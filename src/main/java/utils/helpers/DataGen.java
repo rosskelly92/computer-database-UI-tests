@@ -22,6 +22,9 @@ public class DataGen {
     private static String updatedDiscontDate;
     private static String updatedCompanyName;
 
+    public static String getStrangeName() {
+        return "!£&*(@)$_+=^-[];'#,./{}:~<>?|"; }
+
     public static String getName() {
         if (name == null) {
             name = RandomStringUtils.randomAlphanumeric(10);
@@ -101,5 +104,4 @@ public class DataGen {
         }
         return updatedCompanyName;
     }
-
 }
