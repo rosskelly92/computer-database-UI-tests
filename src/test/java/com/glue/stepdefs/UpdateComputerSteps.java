@@ -137,4 +137,14 @@ public class UpdateComputerSteps {
                 .selectComputer()
                 .updateDiscontDate(dateValue);
     }
+
+    @When("^I update a computer to have special characters in the name$")
+    public void iUpdateAComputerToHaveSpecialCharactersInTheName() throws Throwable {
+        homePage = helper.getHomePage()
+                .clickOnAddComputer()
+                .addComputerNameOnly(DataGen.getName())
+                .applyNameFilter(DataGen.getName())
+                .selectComputer()
+                .updateName(DataGen.getStrangeName());
+    }
 }

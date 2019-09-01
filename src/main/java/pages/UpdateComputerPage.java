@@ -111,4 +111,10 @@ public class UpdateComputerPage extends BasePage {
         Do.click(createBtn);
         return PageFactory.initElements(driver, UpdateComputerPage.class);
     }
+
+    public HomePage updateName(String strangeName) {
+        Do.sendKeys(nameField, DataGen.getStrangeName());
+        Do.click(createBtn);
+        return PageFactory.initElements(driver, HomePage.class);
+    }
 }
