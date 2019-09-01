@@ -1,16 +1,14 @@
 package utils.helpers;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.text.SimpleDateFormat;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class DataGen {
 
-    static Logger log = LogManager.getLogger(DataGen.class);
+    private static final Logger log = LogManager.getLogger(DataGen.class);
 
     private static String name;
     private static String introDate;
