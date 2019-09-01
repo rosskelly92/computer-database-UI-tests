@@ -90,4 +90,13 @@ public class UpdateComputerPage extends BasePage {
         Do.click(createBtn);
         return PageFactory.initElements(driver, UpdateComputerPage.class);
     }
+
+    public HomePage updateFieldsAndCancel() {
+        Do.sendKeys(nameField, DataGen.getUpdatedName());
+        Do.sendKeys(introField, DataGen.getUpdatedIntroDate());
+        Do.sendKeys(discontField, DataGen.getUpdatedDiscontDate());
+        Do.select(companyDropdown, DataGen.getUpdatedCompanyName());
+        Do.click(cancelBtn);
+        return PageFactory.initElements(driver, HomePage.class);
+    }
 }

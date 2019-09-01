@@ -1,6 +1,6 @@
-# RossTestFramework
+# Computer-Database-UI-Tests
 
-Example UI Test framework to cover regression scenarios for computers-database application.
+Example UI Test framework to cover regression scenarios for computers-database application.``
 
 ## Getting Started
 
@@ -21,26 +21,32 @@ Update URL if necessary
 
 ## Running the tests
 
-In the pom.xml build section, update the \<tags\> property to any or all of the utilised tags below to run those cucumber tags:
-```$xslt
-wip
-smoke
-regression
-create
-read
-update
-delete
-```
+#### Tags to run
 
-```
-mvn clean verify
-```
+Examples of tags used are:
+```@smoke``` ```@regression``` ```@wip```
 
-### Break down into end to end tests
 
-@smoke tests cover basic create/read/update/delete functions\
-All tests are marked as @regression for full coverage
+```@smoke``` covers highest priority TC's\
+```@wip``` is used for creating new tests\
+```@regression``` is to run all tests
 
-## Authors
+Update \<tags\> in pom build section to your selection.
+
+Then run: ```mvn clean verify```
+
+### Running in Window
+
+Headless mode is controlled in BrowserOptions.java\
+To run in window, comment out the "--headless" option for whichever browser you're using.
+
+### Debugging
+
+1) ensure only the test to debug is marked as @wip
+2) add breakpoints if necessary
+3) right click RunCucumberTest.java
+4) select Debug RunCucumberTest
+
+## Author
 
 * **Ross Kelly**
