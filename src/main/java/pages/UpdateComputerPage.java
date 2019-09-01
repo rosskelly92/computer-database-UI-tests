@@ -99,4 +99,16 @@ public class UpdateComputerPage extends BasePage {
         Do.click(cancelBtn);
         return PageFactory.initElements(driver, HomePage.class);
     }
+
+    public UpdateComputerPage updateIntroDate(String dateValue) {
+        Do.sendKeys(introField, dateValue);
+        Do.click(createBtn);
+        return PageFactory.initElements(driver, UpdateComputerPage.class);
+    }
+
+    public UpdateComputerPage updateDiscontDate(String dateValue) {
+        Do.sendKeys(discontField, dateValue);
+        Do.click(createBtn);
+        return PageFactory.initElements(driver, UpdateComputerPage.class);
+    }
 }

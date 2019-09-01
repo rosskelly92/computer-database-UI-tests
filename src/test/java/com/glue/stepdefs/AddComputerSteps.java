@@ -75,4 +75,18 @@ public class AddComputerSteps {
         homePage = helper.getHomePage()
                 .addMultipleComputers(numberToAdd);
     }
+
+    @When("^I attempt to add a computer with Introduced date \"([^\"]*)\"$")
+    public void iAttemptToAddAComputerWithIntroducedDate(String dateValue) throws Throwable {
+        addComputerPage = helper.getHomePage()
+                .clickOnAddComputer()
+                .addComputerWithIntroDate(dateValue);
+    }
+
+    @When("^I attempt to add a computer with Discontinued date \"([^\"]*)\"$")
+    public void iAttemptToAddAComputerWithDiscontinuedDate(String dateValue) throws Throwable {
+        addComputerPage = helper.getHomePage()
+                .clickOnAddComputer()
+                .addComputerWithDiscontDate(dateValue);
+    }
 }

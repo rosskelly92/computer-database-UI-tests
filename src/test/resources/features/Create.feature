@@ -34,3 +34,39 @@ Feature: Create
     When I cancel a new computer addition
     And I search for the computer
     Then there are no search results
+
+  @create @TC004 @bug @B002
+  Scenario Outline: Add computer - date validation on Introduced field
+    When I attempt to add a computer with Introduced date "<intro>"
+    Then I receive a validation warning
+    Examples:
+    | intro |
+    | 2019-01-00 |
+    | 2019-01-32 |
+    | 2019-02-29 |
+    | 2019-13-01 |
+    | 2019-00-01 |
+    | 2019-01--01 |
+    | 2019--01-01 |
+    | 2019.01.01  |
+    | 2019 01 01  |
+    | 01-01-2019  |
+    | 01 Jan 2019 |
+
+  @create @TC005 @bug @B002
+  Scenario Outline: Add computer - date validation on Discontinued field
+    When I attempt to add a computer with Discontinued date "<discont>"
+    Then I receive a validation warning
+    Examples:
+      | discont |
+      | 2019-01-00 |
+      | 2019-01-32 |
+      | 2019-02-29 |
+      | 2019-13-01 |
+      | 2019-00-01 |
+      | 2019-01--01 |
+      | 2019--01-01 |
+      | 2019.01.01  |
+      | 2019 01 01  |
+      | 01-01-2019  |
+      | 01 Jan 2019 |
