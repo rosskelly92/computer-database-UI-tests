@@ -43,6 +43,21 @@ public class HomePage extends BasePage {
     @FindBy (xpath = "//em")
     private WebElement noResultsTable;
 
+    @FindBy (xpath = "//a[contains(.,'Previous')]")
+    private WebElement previousBtn;
+
+    @FindBy (xpath = "//a[contains(.,'Next')]")
+    private WebElement nextBtn;
+
+    @FindBy (xpath = "//li[contains(.,'Previous')]")
+    private WebElement previousBtnListItem;
+
+    @FindBy (xpath = "//li[contains(.,'Next')]")
+    private WebElement nextBtnListItem;
+
+    @FindBy (xpath = "//li[@class='current']")
+    private WebElement paginationText;
+
     public String getTitle() {
         Do.waitForDisplay(headerLink);
         return driver.getTitle();
@@ -64,6 +79,7 @@ public class HomePage extends BasePage {
     public HomePage applyNameFilter(String name) {
         Do.sendKeys(filterInput, name);
         Do.click(filterBtn);
+        log.info("Applying filter: " + name);
         if(tableResultsHeader.getText().contains("computers found")) Do.waitForAllMatch(tableLinks, name);
         return PageFactory.initElements(driver, HomePage.class);
     }
@@ -98,5 +114,55 @@ public class HomePage extends BasePage {
     public UpdateComputerPage browserBackToEditPage() {
         driver.navigate().back();
         return PageFactory.initElements(driver, UpdateComputerPage.class);
+    }
+
+    public boolean isPreviousBtnDisabled() {
+        return previousBtnListItem.getAttribute("class").contains("disabled");
+    }
+
+    public boolean isNextBtnDisabled() {
+        return nextBtnListItem.getAttribute("class").contains("disabled");
+    }
+
+    public HomePage clickNextPage() {
+        Do.click(nextBtn);
+        return PageFactory.initElements(driver, HomePage.class);
+    }
+
+    public HomePage clickPreviousPage() {
+        Do.click(previousBtn);
+        return PageFactory.initElements(driver, HomePage.class);
+    }
+
+    public String getPaginationText() {
+        return paginationText.getText();
+    }
+
+    public HomePage clearFilter() {
+        filterInput.clear();
+        Do.click(filterBtn);
+        return PageFactory.initElements(driver, HomePage.class);
+    }
+
+    public HomePage applySorting(String columnToSort, String sortOrder) {
+
+        By columnLink = By.xpath("//th//a[contains(.,'"+columnToSort+"')]");
+        By columnSortStatus = By.xpath("//th[.//a[contains(.,'"+columnToSort+"')]]");
+
+        WebElement link = driver.findElement(columnLink);
+        WebElement sortStatus = driver.findElement(columnSortStatus);
+
+        switch (sortOrder) {
+            case "ascending":
+                while (!sortStatus.getAttribute("class").contains("SortUp")) {
+                    Do.click(link);
+                }
+            case "descending":
+                while (!sortStatus.getAttribute("class").contains("SortDown")) {
+                    Do.click(link);
+                }
+        }
+        return PageFactory.initElements(driver, HomePage.class);
+
     }
 }

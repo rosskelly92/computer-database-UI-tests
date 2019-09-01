@@ -1,6 +1,6 @@
 @regression
 Feature: Create
-  Verifying the functionality for adding a new computer
+  Verifying the functionality for deleting a computer
 
   Background: Initialise base page and navigate to base url
     Given I load the HomePage
@@ -30,3 +30,4 @@ Feature: Create
     When I navigate back to the computer
     And I click create
     Then it is handled gracefully
+    # to complete once requirement clarified
