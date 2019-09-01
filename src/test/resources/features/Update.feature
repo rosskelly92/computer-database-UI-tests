@@ -105,7 +105,7 @@ Feature: Create
       | 01-01-2019  |
       | 01 Jan 2019 |
 
-  @update @TC015 @bug @B004 @wip
+  @update @TC015 @bug @B004
   Scenario: edit mode - special characters in Name field
     When I update a computer to have special characters in the name
     And I search for the special computer
