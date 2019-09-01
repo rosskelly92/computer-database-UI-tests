@@ -68,3 +68,40 @@ Feature: Create
     When I cancel an update
     And I search for the updated computer
     Then there are no search results
+
+  @update @TC013 @bug @B002
+  Scenario Outline: Add computer - date validation on Introduced field
+    When I attempt to update a computer with Introduced date "<intro>"
+    Then I receive an update validation warning
+    Examples:
+      | intro |
+      | 2019-01-00 |
+      | 2019-01-32 |
+      | 2019-02-29 |
+      | 2019-13-01 |
+      | 2019-00-01 |
+      | 2019-01--01 |
+      | 2019--01-01 |
+      | 2019.01.01  |
+      | 2019 01 01  |
+      | 01-01-2019  |
+      | 01 Jan 2019 |
+
+  @update @TC014 @bug @B002
+  Scenario Outline: Add computer - date validation on Discontinued field
+    When I attempt to update a computer with Discontinued date "<discont>"
+    Then I receive an update validation warning
+    Examples:
+      | discont |
+      | 2019-01-00 |
+      | 2019-01-32 |
+      | 2019-02-29 |
+      | 2019-13-01 |
+      | 2019-00-01 |
+      | 2019-01--01 |
+      | 2019--01-01 |
+      | 2019.01.01  |
+      | 2019 01 01  |
+      | 01-01-2019  |
+      | 01 Jan 2019 |
+

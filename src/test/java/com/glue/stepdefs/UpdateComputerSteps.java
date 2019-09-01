@@ -117,4 +117,24 @@ public class UpdateComputerSteps {
                 .selectComputer()
                 .updateFieldsAndCancel();
     }
+
+    @When("^I attempt to update a computer with Introduced date \"([^\"]*)\"$")
+    public void iAttemptToUpdateAComputerWithIntroducedDate(String dateValue) throws Throwable {
+        updateComputerPage = helper.getHomePage()
+                .clickOnAddComputer()
+                .addNewComputer()
+                .applyNameFilter(DataGen.getName())
+                .selectComputer()
+                .updateIntroDate(dateValue);
+    }
+
+    @When("^I attempt to update a computer with Discontinued date \"([^\"]*)\"$")
+    public void iAttemptToUpdateAComputerWithDiscontinuedDate(String dateValue) throws Throwable {
+        updateComputerPage = helper.getHomePage()
+                .clickOnAddComputer()
+                .addNewComputer()
+                .applyNameFilter(DataGen.getName())
+                .selectComputer()
+                .updateDiscontDate(dateValue);
+    }
 }

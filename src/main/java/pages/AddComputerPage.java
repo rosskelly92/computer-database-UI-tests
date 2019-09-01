@@ -82,4 +82,18 @@ public class AddComputerPage extends BasePage {
         Do.click(cancelBtn);
         return PageFactory.initElements(driver, HomePage.class);
     }
+
+    public AddComputerPage addComputerWithIntroDate(String dateValue) {
+        Do.sendKeys(nameField, DataGen.getName());
+        Do.sendKeys(introField, dateValue);
+        Do.click(createBtn);
+        return PageFactory.initElements(driver, AddComputerPage.class);
+    }
+
+    public AddComputerPage addComputerWithDiscontDate(String dateValue) {
+        Do.sendKeys(nameField, DataGen.getName());
+        Do.sendKeys(discontField, dateValue);
+        Do.click(createBtn);
+        return PageFactory.initElements(driver, AddComputerPage.class);
+    }
 }
