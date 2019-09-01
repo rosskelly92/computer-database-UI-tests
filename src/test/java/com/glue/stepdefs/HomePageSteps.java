@@ -2,13 +2,17 @@ package com.glue.stepdefs;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import pages.HomePage;
 import utils.helpers.DataGen;
+import utils.helpers.Do;
 import utils.helpers.WorldHelper;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class HomePageSteps {
@@ -78,5 +82,91 @@ public class HomePageSteps {
     public void theSpecialComputerIsDisplayedInResults() throws Throwable {
         assertThat("Incorrect computer name", homePage.getDisplayedName(), is(DataGen.getStrangeName()));
 
+    }
+
+    @Then("^previous button is disabled$")
+    public void previousButtonIsDisabled() throws Throwable {
+        assertThat("button was not disabled", homePage.isPreviousBtnDisabled(), is(true));
+    }
+
+    @When("^I click next page$")
+    public void iClickNextPage() throws Throwable {
+        homePage = helper.getHomePage()
+                .clickNextPage();
+    }
+
+    @Then("^I am on the second page of results$")
+    public void iAmOnTheSecondPageOfResults() throws Throwable {
+        homePage = helper.getHomePage();
+        assertThat("unexpected page navigation", homePage.getPaginationText(), containsString("11 to 20"));
+    }
+
+    @And("^I can navigate back to the first page$")
+    public void iCanNavigateBackToTheFirstPage() throws Throwable {
+        homePage = helper.getHomePage();
+        assertThat("previous button was disabled", homePage.isPreviousBtnDisabled(), is(false));
+        homePage.clickPreviousPage();
+    }
+
+    @Then("^there are (\\d+) search results$")
+    public void thereAreSearchResults(int arg0) throws Throwable {
+        assertThat("unexpected number of search results", homePage.getPaginationText(), is("Displaying 1 to 4 of 4"));
+    }
+
+    @And("^clear the filter$")
+    public void clearTheFilter() throws Throwable {
+        homePage = helper.getHomePage()
+                .clearFilter();
+    }
+
+    @Then("^all results are displayed$")
+    public void allResultsAreDisplayed() throws Throwable {
+        assertThat(homePage.getPaginationText(), not("Displaying 1 to 1 of 1"));
+    }
+
+    @Given("^I add multiple unique computers$")
+    public void iAddMultipleUniqueComputers() throws Throwable {
+        homePage = helper.getHomePage()
+                .clickOnAddComputer()
+                .addNewComputer()
+                .clickOnAddComputer()
+                .addComputerNameOnly(DataGen.getUpdatedName());
+    }
+
+    @Then("^next button is disabled$")
+    public void nextButtonIsDisabled() throws Throwable {
+        assertThat("next button was enabled", homePage.isNextBtnDisabled(), is(true));
+    }
+
+    @Then("^values from the second filter are displayed in the table$")
+    public void valuesFromTheSecondFilterAreDisplayedInTheTable() throws Throwable {
+        assertThat("Incorrect computer name", homePage.getDisplayedName(), is(DataGen.getUpdatedName()));
+    }
+
+    @And("^pagination text reads \"([^\"]*)\"$")
+    public void paginationTextReads(String expectedText) throws Throwable {
+        assertThat(homePage.getPaginationText(), is(expectedText));
+    }
+
+    @And("^the search results read \"([^\"]*)\"$")
+    public void theSearchResultsRead(String expectedHeader) throws Throwable {
+        assertThat(homePage.getResultsHeader(), is(expectedHeader));
+    }
+
+    @Given("^I search for \"([^\"]*)\"$")
+    public void iSearchFor(String filter) throws Throwable {
+        homePage = helper.getHomePage()
+                .applyNameFilter(filter);
+    }
+
+    @When("^I apply \"([^\"]*)\" sort order to \"([^\"]*)\"$")
+    public void iApplySortOrderTo(String sortOrder, String columnToSort) throws Throwable {
+        homePage = helper.getHomePage()
+                .applySorting(columnToSort, sortOrder);
+    }
+
+    @Then("^the values are displayed in \"([^\"]*)\" order of \"([^\"]*)\"$")
+    public void theValuesAreDisplayedInOrderOf(String sortOrder, String sortedColumn) throws Throwable {
+        assertThat(sortedColumn + " column is not sorted correctly", homePage.isTableSortedCorrectly(sortedColumn, sortOrder), is(true));
     }
 }

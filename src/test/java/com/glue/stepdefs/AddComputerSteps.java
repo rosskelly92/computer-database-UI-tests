@@ -96,4 +96,6 @@ public class AddComputerSteps {
                 .clickOnAddComputer()
                 .addComputerNameOnly(DataGen.getStrangeName());
     }
+
+
 }

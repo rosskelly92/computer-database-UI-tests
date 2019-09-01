@@ -1,5 +1,6 @@
 package pages;
 
+import com.google.common.collect.Ordering;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import utils.helpers.Do;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HomePage extends BasePage {
@@ -43,6 +45,21 @@ public class HomePage extends BasePage {
     @FindBy (xpath = "//em")
     private WebElement noResultsTable;
 
+    @FindBy (xpath = "//a[contains(.,'Previous')]")
+    private WebElement previousBtn;
+
+    @FindBy (xpath = "//a[contains(.,'Next')]")
+    private WebElement nextBtn;
+
+    @FindBy (xpath = "//li[contains(.,'Previous')]")
+    private WebElement previousBtnListItem;
+
+    @FindBy (xpath = "//li[contains(.,'Next')]")
+    private WebElement nextBtnListItem;
+
+    @FindBy (xpath = "//li[@class='current']")
+    private WebElement paginationText;
+
     public String getTitle() {
         Do.waitForDisplay(headerLink);
         return driver.getTitle();
@@ -64,7 +81,8 @@ public class HomePage extends BasePage {
     public HomePage applyNameFilter(String name) {
         Do.sendKeys(filterInput, name);
         Do.click(filterBtn);
-        if(tableResultsHeader.getText().contains("computers found")) Do.waitForAllMatch(tableLinks, name);
+        log.info("Applying filter: " + name);
+//        if(tableResultsHeader.getText().contains("computers found")) Do.waitForAllMatch(tableLinks, name);
         return PageFactory.initElements(driver, HomePage.class);
     }
 
@@ -98,5 +116,91 @@ public class HomePage extends BasePage {
     public UpdateComputerPage browserBackToEditPage() {
         driver.navigate().back();
         return PageFactory.initElements(driver, UpdateComputerPage.class);
+    }
+
+    public boolean isPreviousBtnDisabled() {
+        return previousBtnListItem.getAttribute("class").contains("disabled");
+    }
+
+    public boolean isNextBtnDisabled() {
+        return nextBtnListItem.getAttribute("class").contains("disabled");
+    }
+
+    public HomePage clickNextPage() {
+        Do.click(nextBtn);
+        return PageFactory.initElements(driver, HomePage.class);
+    }
+
+    public HomePage clickPreviousPage() {
+        Do.click(previousBtn);
+        return PageFactory.initElements(driver, HomePage.class);
+    }
+
+    public String getPaginationText() {
+        return paginationText.getText();
+    }
+
+    public HomePage clearFilter() {
+        filterInput.clear();
+        Do.click(filterBtn);
+        return PageFactory.initElements(driver, HomePage.class);
+    }
+
+    public HomePage applySorting(String columnToSort, String sortOrder) {
+        By columnLink = By.xpath("//th//a[contains(.,'"+columnToSort+"')]");
+        By columnSortStatus = By.xpath("//th[.//a[contains(.,'"+columnToSort+"')]]");
+
+        switch (sortOrder) {
+            case "ascending":
+                while (!driver.findElement(columnSortStatus).getAttribute("class").contains("SortUp")) {
+                    Do.click(driver.findElement(columnLink));
+                    Do.checkPageReady();
+                }
+                break;
+            case "descending":
+                while (!driver.findElement(columnSortStatus).getAttribute("class").contains("SortDown")) {
+                    Do.click(driver.findElement(columnLink));
+                    Do.checkPageReady();
+                }
+                break;
+        }
+        return PageFactory.initElements(driver, HomePage.class);
+
+    }
+
+    public Boolean isTableSortedCorrectly(String sortedColumn, String sortOrder) {
+        By resultsLocator;
+        switch (sortedColumn) {
+            case "Computer name":
+                resultsLocator = By.xpath("//td[1]");
+                break;
+            case "Introduced":
+                resultsLocator = By.xpath("//td[2]");
+                break;
+            case "Discontinued":
+                resultsLocator = By.xpath("//td[3]");
+                break;
+            case "Company":
+                resultsLocator = By.xpath("//td[4]");
+                break;
+            default:
+                log.error("sort column not recognised: " + sortedColumn);
+                return false;
+        }
+        List<WebElement> elements = driver.findElements(resultsLocator);
+        List< String > values = new ArrayList<>();
+        for (WebElement e : elements)
+            values.add(e.getText());
+        log.info("Table results for column '" + sortedColumn + "' are: " + values);
+        switch(sortOrder) {
+            case "ascending":
+                return Ordering.natural().isOrdered(values);
+            case "descending":
+                return Ordering.natural().reverse().isOrdered(values);
+            default:
+                log.error("sort order not recognised: " + sortOrder);
+                return false;
+        }
+
     }
 }
