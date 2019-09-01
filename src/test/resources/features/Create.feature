@@ -5,7 +5,7 @@ Feature: Create
   Background: Initialise base page and navigate to base url
     Given I load the HomePage
 
-  @smoke @create @TC002 @wip
+  @smoke @create @TC002
   Scenario: Add a new computer with minimum mandatory data
     When I add a new computer with only name field populated
     Then the save message reads "Done! Computer " computer name " has been created"

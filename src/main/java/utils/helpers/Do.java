@@ -11,7 +11,6 @@ import java.util.List;
 
 public class Do {
 
-    private static WebDriver driver = DriverFactory.getDriver();
     private static WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 15);
 
     public static boolean waitForDisplay(WebElement element) {
@@ -78,13 +77,14 @@ public class Do {
         };
     }
 
-    public static String jsGetValue (WebElement element) {
+    public static String jsGetValue (WebDriver driver, WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         return js.executeScript("return arguments[0].value;", element).toString();
     }
 
-    public static void checkPageReady() {
-        new WebDriverWait(driver, 30).until((ExpectedCondition<Boolean>) wd ->
-                ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
+    public static void checkPageReady(WebDriver driver) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        wait.until((ExpectedCondition<Boolean>) wd ->
+                js.executeScript("return document.readyState").equals("complete"));
     }
 }

@@ -96,7 +96,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire.version}</version>
                 <configuration>
-                    <forkCount>20</forkCount>
+                    <forkCount>10</forkCount>
                     <reuseForks>true</reuseForks>
                     <includes>
                         <include>**/Parallel*IT.class</include>

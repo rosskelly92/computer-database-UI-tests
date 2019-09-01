@@ -82,7 +82,7 @@ public class HomePage extends BasePage {
         Do.sendKeys(filterInput, name);
         Do.click(filterBtn);
         log.info("Applying filter: " + name);
-//        if(tableResultsHeader.getText().contains("computers found")) Do.waitForAllMatch(tableLinks, name);
+        Do.checkPageReady(driver);
         return PageFactory.initElements(driver, HomePage.class);
     }
 
@@ -154,13 +154,13 @@ public class HomePage extends BasePage {
             case "ascending":
                 while (!driver.findElement(columnSortStatus).getAttribute("class").contains("SortUp")) {
                     Do.click(driver.findElement(columnLink));
-                    Do.checkPageReady();
+                    Do.checkPageReady(driver);
                 }
                 break;
             case "descending":
                 while (!driver.findElement(columnSortStatus).getAttribute("class").contains("SortDown")) {
                     Do.click(driver.findElement(columnLink));
-                    Do.checkPageReady();
+                    Do.checkPageReady(driver);
                 }
                 break;
         }
