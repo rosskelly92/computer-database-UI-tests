@@ -94,4 +94,9 @@ public class HomePage extends BasePage {
         }
         return PageFactory.initElements(driver, HomePage.class);
     }
+
+    public UpdateComputerPage browserBackToEditPage() {
+        driver.navigate().back();
+        return PageFactory.initElements(driver, UpdateComputerPage.class);
+    }
 }

@@ -23,3 +23,10 @@ Feature: Create
     When I delete the computer
     And I search for the computer
     Then correct values are displayed in the table
+
+  @delete @TC019 @bug @ignore @incomplete
+  Scenario: Navigate back to a deleted computer
+    Given I have deleted a computer
+    When I navigate back to the computer
+    And I click create
+    Then it is handled gracefully

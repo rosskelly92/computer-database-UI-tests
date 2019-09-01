@@ -1,6 +1,7 @@
 package com.glue.stepdefs;
 
 import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -47,5 +48,22 @@ public class DeleteComputerSteps {
     public void theDeleteMessageReads(String expectedMessage) throws Throwable {
         assertThat(homePage.saveWasSuccessful(), is(true));
         assertThat(homePage.getSaveMessage(), is(expectedMessage));
+    }
+
+    @When("^I navigate back to the computer$")
+    public void iNavigateBackToTheComputer() throws Throwable {
+        helper.getHomePage()
+                .browserBackToEditPage();
+    }
+
+    @And("^I click create$")
+    public void iClickCreate() throws Throwable {
+        helper.getUpdateComputerPage()
+                .clickCreate();
+    }
+
+    @Then("^it is handled gracefully$")
+    public void itIsHandledGracefully() throws Throwable {
+        //ToDo: current bug, implement test once fixed
     }
 }
