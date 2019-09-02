@@ -15,7 +15,7 @@ Feature: Create
     Then I am on the second page of results
     And I can navigate back to the first page
 
-  @retrieve @TC020
+  @retrieve @TC020 @flaky
   Scenario: Correct number of search results retrieved
     Given I have 4 identical computers
     When I search for the computer

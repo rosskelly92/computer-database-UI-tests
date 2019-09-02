@@ -1,6 +1,5 @@
 package utils.fileUtils;
 
-import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.io.FileInputStream;
@@ -10,7 +9,7 @@ import java.util.Properties;
 
 public class Props {
 
-    private static final Logger log = LogManager.getLogger(Props.class);
+    private static final Logger log = Logger.getLogger(Props.class);
 
     public static String getConfig(String keyName) {
 

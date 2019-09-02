@@ -1,7 +1,6 @@
 package pages;
 
 import com.google.common.collect.Ordering;
-import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,7 +16,7 @@ import java.util.List;
 
 public class HomePage extends BasePage {
 
-    private static final Logger log = LogManager.getLogger(HomePage.class);
+    private static final Logger log = Logger.getLogger(HomePage.class);
 
     public HomePage (WebDriver driver) { super(driver);}
 
@@ -81,7 +80,7 @@ public class HomePage extends BasePage {
     public HomePage applyNameFilter(String name) {
         Do.sendKeys(filterInput, name);
         Do.click(filterBtn);
-        log.info("Applying filter: " + name);
+        log.debug("Applying filter: " + name);
         Do.checkPageReady(driver);
         return PageFactory.initElements(driver, HomePage.class);
     }
@@ -89,7 +88,7 @@ public class HomePage extends BasePage {
     public int numberOfComputersInTable() { return tableLinks.size(); }
 
     public UpdateComputerPage selectComputer() {
-        if (numberOfComputersInTable() > 1) log.info(numberOfComputersInTable() + " table items, clicking the top computer");
+        if (numberOfComputersInTable() > 1) log.debug(numberOfComputersInTable() + " table items, clicking the top computer");
         Do.click(tableLinks.get(0));
         return PageFactory.initElements(driver, UpdateComputerPage.class);
     }
@@ -184,14 +183,14 @@ public class HomePage extends BasePage {
                 resultsLocator = By.xpath("//td[4]");
                 break;
             default:
-                log.error("sort column not recognised: " + sortedColumn);
+                log.debug("sort column not recognised: " + sortedColumn);
                 return false;
         }
         List<WebElement> elements = driver.findElements(resultsLocator);
         List< String > values = new ArrayList<>();
         for (WebElement e : elements)
             values.add(e.getText());
-        log.info("Table results for column '" + sortedColumn + "' are: " + values);
+        log.debug("Table results for column '" + sortedColumn + "' are: " + values);
         switch(sortOrder) {
             case "ascending":
                 return Ordering.natural().isOrdered(values);

@@ -1,14 +1,13 @@
 package utils.helpers;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class DataGen {
 
-    private static final Logger log = LogManager.getLogger(DataGen.class);
+    private static final Logger log = Logger.getLogger(DataGen.class);
 
     private static String name;
     private static String introDate;
@@ -21,11 +20,11 @@ public class DataGen {
     private static String updatedCompanyName;
 
     public static String getStrangeName() {
-        return "!£&*(@)$_+=^-[];'#,./{}:~<>?|"; }
+        return "Z!£&*(@)$_+=^-[];'#,./{}:~<>?|"; }
 
     public static String getName() {
         if (name == null) {
-            name = RandomStringUtils.randomAlphanumeric(10);
+            name = RandomStringUtils.randomAlphanumeric(25);
             log.debug("name is: " + name);
         }
         return name;
@@ -65,7 +64,7 @@ public class DataGen {
 
     public static String getUpdatedName() {
         if (updatedName == null) {
-            updatedName = RandomStringUtils.randomAlphanumeric(10);
+            updatedName = RandomStringUtils.randomAlphanumeric(24);
             log.debug("updatedName is: " + updatedName);
         }
         return updatedName;
