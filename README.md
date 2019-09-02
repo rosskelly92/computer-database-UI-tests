@@ -9,7 +9,7 @@ Maven 3.5 or above
 
 ## Running the tests
 
-By default, ```mvn clean verify``` will run the full regression suite in chrome headless mode with 20 concurrent threads.
+By default, ```mvn clean verify``` will run the full regression suite in chrome headless mode with 10 parallel threads.
 
 #### Tags to run
 
