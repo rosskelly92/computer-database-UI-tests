@@ -9,7 +9,7 @@ Maven 3.5 or above
 
 ## Manual Tests
 
-The associated test plan can be found [here](https://github.com/rosskelly92/computer-database-UI-tests/blob/master/Computer%20Database%20Test%20Plan.xlsx)
+The associated test plan can be found in an excel document [here](https://github.com/rosskelly92/computer-database-UI-tests/blob/master/Computer%20Database%20Test%20Plan.xlsx)
 
 ## Running the tests
 
