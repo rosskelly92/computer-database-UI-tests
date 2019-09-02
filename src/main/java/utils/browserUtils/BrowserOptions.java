@@ -19,10 +19,4 @@ public class BrowserOptions {
         options.setBinary(firefoxBinary);
         return options;
     }
-
-    //ToDo: I guess I should support edge
-//    public static EdgeOptions getEdgeOptions() {
-//        EdgeOptions options = new EdgeOptions();
-//        return options;
-//    }
 }
