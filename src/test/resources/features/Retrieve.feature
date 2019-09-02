@@ -15,7 +15,7 @@ Feature: Create
     Then I am on the second page of results
     And I can navigate back to the first page
 
-  @retrieve @TC020
+  @retrieve @TC020 @flaky
   Scenario: Correct number of search results retrieved
     Given I have 4 identical computers
     When I search for the computer
@@ -37,7 +37,7 @@ Feature: Create
     And I search for the updated computer
     Then values from the second filter are displayed in the table
 
-  @retrieve @TC020 @bug @B005
+  @retrieve @TC020 @bug @B005 @ignore
   Scenario: Search results span multiple pages
     Given I have 11 identical computers
     When I search for the computer
@@ -46,7 +46,7 @@ Feature: Create
     And pagination text reads "Displaying 11 to 11 of 11"
     And the search results read "11 computers found"
 
-  @retrieve @TC023 @bug @B003
+  @retrieve @TC023 @bug @B003 @ignore
   Scenario Outline: Verify Sort Order
     Given I search for "b"
     When I apply "<order>" sort order to "<column>"

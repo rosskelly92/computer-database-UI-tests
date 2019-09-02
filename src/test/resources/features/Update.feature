@@ -41,7 +41,7 @@ Feature: Create
     And I search for the updated computer
     Then updated values are displayed in the table
 
-  @update @TC009
+  @update @TC009 @flaky
   Scenario: Update name only computer to a new name
     Given I add a new computer with only name field populated
     When I update the name only

@@ -56,9 +56,19 @@
             <version>${webdrivermanager.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j2.version}</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.26</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
         </dependency>
         <dependency>
             <groupId>org.picocontainer</groupId>
@@ -72,14 +82,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.5</version>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.1-jre</version>
         </dependency>
 
     </dependencies>
@@ -91,8 +96,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire.version}</version>
                 <configuration>
-                    <forkCount>20</forkCount>
-                    <reuseForks>true</reuseForks>
+                    <forkCount>10</forkCount>
+                    <reuseForks>false</reuseForks>
                     <includes>
                         <include>**/Parallel*IT.class</include>
                     </includes>
@@ -137,6 +142,7 @@
                             <!-- The tags to run, maps to CucumberOptions.tags property. -->
                             <tags>
                                 <tag>@regression</tag>
+                                <tag>~@ignore</tag>
                             </tags>
                             <useTestNG>false</useTestNG>
                             <namingScheme>simple</namingScheme>

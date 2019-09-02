@@ -11,7 +11,7 @@ Feature: Create
     When I delete the computer
     Then the delete message reads "Done! Computer has been deleted"
 
-  @smoke @delete @TC017
+  @smoke @delete @TC017 @flaky
   Scenario: Deleted computer cannot be retrieved
     Given I have deleted a computer
     When I search for the deleted computer

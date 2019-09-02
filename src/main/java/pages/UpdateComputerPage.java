@@ -56,9 +56,9 @@ public class UpdateComputerPage extends BasePage {
         return PageFactory.initElements(driver, HomePage.class);
     }
 
-    public String getNameValue() { return Do.jsGetValue(nameField); }
-    public String getIntroDateValue() { return Do.jsGetValue(introField); }
-    public String getDiscontDateValue() { return Do.jsGetValue(discontField); }
+    public String getNameValue() { return Do.jsGetValue(driver, nameField); }
+    public String getIntroDateValue() { return Do.jsGetValue(driver, introField); }
+    public String getDiscontDateValue() { return Do.jsGetValue(driver, discontField); }
     public String getCompanyNameValue() { return selectedDropdownField.getText(); }
 
     public UpdateComputerPage updateNameToEmpty() {
