@@ -7,6 +7,10 @@ Example UI Test framework to cover regression scenarios for computers-database a
 Java 8 or above\
 Maven 3.5 or above
 
+## Manual Tests
+
+The associated test plan can be found in the root directly as Computer Database Test Plan.xlsx
+
 ## Running the tests
 
 By default, ```mvn clean verify``` will run the full regression suite in chrome headless mode with 20 concurrent threads.
